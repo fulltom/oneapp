@@ -1,0 +1,32 @@
+{
+  "name": "oneapp",
+  "version": "0.0.0",
+  "description": "one app page express bootstrap swig",
+  "main": "",
+  "scripts": {
+    "test": "mocha test",
+    "start" : "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fulltom/oneapp"
+  },
+  "keywords": [
+    "express",
+    "swig",
+    "oneapppage",
+    "bootstrap"
+  ],
+  "author": "Thomas Vergnaud",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fulltom/oneapp/issues"
+  },
+  "dependencies": {
+    "express": "~3.4.7",
+    "swig": "~1.2.2"
+  },
+  "devDependencies": {
+    "mocha": "~1.16.2"
+  }
+}
