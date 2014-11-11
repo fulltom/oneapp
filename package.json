@@ -27,6 +27,5 @@
     "swig": "~1.2.2"
   },
   "devDependencies": {
-    "mocha": "~1.16.2"
   }
 }
