@@ -1,4 +1,4 @@
-oneapp
+SPA
 ======
 
-oneapp page express bootstrap swig 
+SPA modern webapp

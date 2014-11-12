@@ -4,14 +4,12 @@ var express = require("express"),
 ;
 
 app.use(require('connect-livereload')());
-
 app.set('view engine', 'html');
-app.set('views', __dirname + '/app');
+app.set('views', __dirname + 'app/views');
 app.use(express.urlencoded())
 app.use(express.json())
-app.use(express.static(__dirname + '/app'));
+app.use(express.static(__dirname + 'app/public'));
 app.engine('html', swig.renderFile);
-
 
 app.get('/', function(req, res){
    res.render('index', {title : "oneappage", content : "main"});
