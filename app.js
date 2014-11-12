@@ -1,12 +1,15 @@
 var express = require("express"),
     swig = require("swig"),
-    app = express();
+	app = module.exports.app = exports.app = express()
+;
+
+app.use(require('connect-livereload')());
 
 app.set('view engine', 'html');
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/app');
 app.use(express.urlencoded())
 app.use(express.json())
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/app'));
 app.engine('html', swig.renderFile);
 
 
