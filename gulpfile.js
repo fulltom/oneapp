@@ -1,16 +1,18 @@
-var gulp = require('gulp');
-var server = require('gulp-express');
+var gulp = require('gulp'),
+	minifycss = require('gulp-minify-css'),
+	server = require('gulp-express');
+
+gulp.task('css', function(){
+	gulp.src('app/styles/main.css')
+	.pipe(minifycss())
+	.pipe(gulp.dest('./dist/css'));
+}
 
 gulp.task('serve', function () {
-    //start the server at the beginning of the task
     server.run({
         file: 'app.js'
     });
-    //restart the server when file changes
-    // gulp.watch(['app/**/*.html'], server.notify);
-    // gulp.watch(['app/styles/**/*.scss'], ['styles:scss']);
-    // gulp.watch(['{.tmp,app}/styles/**/*.css'], ['styles:css', server.notify]);
-    // gulp.watch(['app/scripts/**/*.js'], ['jshint']);
+    gulp.watch(['app/styles/*.css'], ['css'], server.notify);
 });
 
 gulp.task('default', ['serve'], function() {});

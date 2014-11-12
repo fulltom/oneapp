@@ -1,9 +1,9 @@
-var express = require("express"),
+var express = require("express"),	
 	swig = require('swig'),
 	app = express()
 ;
 
-//app.use(require('connect-livereload')());
+app.use(require('connect-livereload')());
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/app/views');
