@@ -1,20 +1,22 @@
 var express = require("express"),
-	exphbs  = require('express-handlebars'),
+	swig = require('swig'),
 	app = express()
 ;
 
 //app.use(require('connect-livereload')());
-app.engine('handlebars', exphbs({defaultLayout: 'main', layout:false}));
-app.set('view engine', 'handlebars');
+app.engine('html', swig.renderFile);
+app.set('view engine', 'html');
 app.set('views', __dirname + '/app/views');
-
+app.set('view cache', false);
+swig.setDefaults({ cache: false });
 app.use(express.urlencoded())
 app.use(express.json())
 app.use(express.static(__dirname + '/public'));
 
-
 app.get('/', function (req, res) {
-    res.render('home');
+    res.render('index', {
+    	title: 'Consolidate.js'
+  });
 });
 
 app.listen(3000);
