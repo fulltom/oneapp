@@ -1,18 +1,20 @@
 var express = require("express"),
-    swig = require("swig"),
-	app = module.exports.app = exports.app = express()
+	exphbs  = require('express-handlebars'),
+	app = express()
 ;
 
-app.use(require('connect-livereload')());
-app.set('view engine', 'html');
-app.set('views', __dirname + 'app/views');
+//app.use(require('connect-livereload')());
+app.engine('handlebars', exphbs({defaultLayout: 'main', layout:false}));
+app.set('view engine', 'handlebars');
+app.set('views', __dirname + '/app/views');
+
 app.use(express.urlencoded())
 app.use(express.json())
-app.use(express.static(__dirname + 'app/public'));
-app.engine('html', swig.renderFile);
+app.use(express.static(__dirname + '/public'));
 
-app.get('/', function(req, res){
-   res.render('index', {title : "oneappage", content : "main"});
+
+app.get('/', function (req, res) {
+    res.render('home');
 });
 
 app.listen(3000);
