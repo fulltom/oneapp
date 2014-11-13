@@ -5,10 +5,12 @@ var gulp = require('gulp'),
 	notify = require('gulp-notify'),
 	concat = require('gulp-concat'),
 	cache = require('gulp-cache'),
-	whitespace = require('gulp-css-whitespace'),
-	autoprefixer = require('gulp-autoprefixer'),
+	imagemin = require('gulp-imagemin'),
 	minifycss = require('gulp-minify-css'),
-	rename = require('gulp-rename')
+	rename = require('gulp-rename'),
+	inject = require('gulp-inject'),
+	livereload = require('gulp-livereload'),
+    del = require('del');
 ;
 
 gulp.task('express', function () {
@@ -42,22 +44,37 @@ gulp.task('styles', function() {
 	.pipe(rename({suffix: '.min'}))
 	.pipe(minifycss())
 	.pipe(gulp.dest('dist/css'))
-	.pipe(notify({ message: 'styles task complete' }));
 });
 
 gulp.task('scripts', function() {
-  return gulp.src('app/assets/*.js')
+  return gulp.src('app/scripts/*.js')
     .pipe(concat('main.js'))
     .pipe(gulp.dest('dist/js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(gulp.dest('dist/js'))
-    .pipe(notify({ message: 'Scripts task complete' }));
 });
+
+// gulp.task('images', function() {
+//   return gulp.src('app/images/*')
+//     .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
+//     .pipe(gulp.dest('dist/img'))
+// });
 
 gulp.task('watch', function() {
   gulp.watch('app/styles/*.scss', ['styles']);
+  gulp.watch('app/scripts/*.js', ['scripts']);
+  gulp.watch('app/images/*', ['images']);
 });
 
-gulp.task('default', ['express', 'watch', 'scripts'], function() {});
+gulp.task('clean', function(cb) {
+    del(['dist/*'], cb);	
+});
+
+gulp.task('default', ['express','clean','scripts','styles', 'watch'], function() {});
+
+// Create LiveReload server
+livereload.listen();
+
+gulp.watch(['dist/*']).on('change', livereload.changed);
 
