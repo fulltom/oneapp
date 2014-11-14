@@ -9,7 +9,7 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	livereload = require('gulp-livereload'),
 	connect = require('gulp-connect'),
-    del = require('del')
+  del = require('del')
 ;
 
 //Connect
@@ -36,8 +36,7 @@ gulp.task('styles', function() {
      }))
 	.pipe(rename({suffix: '.min'}))
     .pipe(minifycss())
-    .pipe(gulp.dest('build/css'))
-    .pipe(livereload(server));
+    .pipe(gulp.dest('build/css'));
 });
 
 gulp.task('scripts', function() {
@@ -66,5 +65,5 @@ gulp.task('clean', function(cb) {
     del(['build/*'], cb);
 });
 
-gulp.task('default', ['connect', 'html','scripts','styles', 'images', 'watch','clean'], function() {});
+gulp.task('default', ['connect', 'html', 'scripts','styles', 'images', 'watch','clean'], function() {});
 
