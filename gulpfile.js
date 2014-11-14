@@ -52,14 +52,15 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('dist/js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
+    .pipe(rename({suffix: Date.now()}))
     .pipe(gulp.dest('dist/js'))
 });
 
-// gulp.task('images', function() {
-//   return gulp.src('app/images/*')
-//     .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
-//     .pipe(gulp.dest('dist/img'))
-// });
+gulp.task('images', function() {
+  return gulp.src('app/images/*')
+    .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
+    .pipe(gulp.dest('dist/img'))
+});
 
 gulp.task('watch', function() {
   gulp.watch('app/styles/*.scss', ['styles']);
@@ -71,7 +72,7 @@ gulp.task('clean', function(cb) {
     del(['dist/*'], cb);	
 });
 
-gulp.task('default', ['express','clean','scripts','styles', 'watch'], function() {});
+gulp.task('default', ['express','clean','scripts','styles', 'images', 'watch'], function() {});
 
 // Create LiveReload server
 livereload.listen();
