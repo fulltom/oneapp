@@ -9,11 +9,9 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "test",
-    "tests"
+    "assets/bower_components"
   ],
-  "dependencies": {
-    "jquery": "~2.1.1",
-    "modernizr": "~2.8.3"
+  "devDependencies": {
+    "foundation": "~5.2.2"
   }
 }

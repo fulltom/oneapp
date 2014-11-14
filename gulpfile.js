@@ -1,11 +1,9 @@
 var gulp = require('gulp'),
-	minifycss = require('gulp-minify-css'),
 	sass = require('gulp-sass'),
 	uglify = require('gulp-uglify'),
 	notify = require('gulp-notify'),
 	concat = require('gulp-concat'),
 	cache = require('gulp-cache'),
-	server = require('gulp-express'),
 	imagemin = require('gulp-imagemin'),
 	minifycss = require('gulp-minify-css'),
 	rename = require('gulp-rename'),
@@ -21,6 +19,7 @@ gulp.task('connect', function() {
     livereload: true
   });
 });
+
 //Copy html
 gulp.task('html', function () {
   gulp.src('assets/*.html')
@@ -30,11 +29,15 @@ gulp.task('html', function () {
 
 
 gulp.task('styles', function() {
-  return gulp.src('assets/styles/*.scss')
-	.pipe(sass())
+  gulp.src(['assets/scss/*.scss', '!assets/scss/_variables.scss'])
+	.pipe(sass({
+            includePaths: ['assets/scss', 'assets/bower_components/foundation/scss'],
+            outputStyle: 'expanded'
+     }))
 	.pipe(rename({suffix: '.min'}))
-	.pipe(minifycss())
-	.pipe(gulp.dest('build/css'))
+    .pipe(minifycss())
+    .pipe(gulp.dest('build/css'))
+    .pipe(livereload(server));
 });
 
 gulp.task('scripts', function() {
@@ -64,9 +67,4 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('default', ['connect', 'html','scripts','styles', 'images', 'watch','clean'], function() {});
-
-// // Create LiveReload server
-// livereload.listen();
-
-// gulp.watch(['dist/*']).on('change', livereload.changed);
 
