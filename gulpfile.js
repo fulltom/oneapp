@@ -32,11 +32,11 @@ gulp.task('html', function () {
 gulp.task('styles', function() {
   gulp.src(['assets/scss/**/*.scss'])
   .pipe(connect.reload())
-  .pipe(livereload())
 	.pipe(sass())
 	.pipe(rename({suffix: '.min'}))
   .pipe(minifycss())
   .pipe(gulp.dest('build/css'))
+  .pipe(livereload())
 
 
 });
@@ -69,7 +69,7 @@ gulp.task('images', function() {
 gulp.task('watch', function() {
   livereload.listen();
 	gulp.watch(['assets/*.html'], ['html']).on('change', livereload.changed);
-	gulp.watch(['assets/scss/*.scss'], ['styles']).on('change', livereload.changed);
+	gulp.watch(['assets/scss/**/*.scss'], ['styles']).on('change', livereload.changed);
 	gulp.watch(['assets/scripts/*.js'], ['scripts']).on('change', livereload.changed);
 	gulp.watch(['assets/images/*'], ['images']).on('change', livereload.changed);
   gulp.watch(['build/*.html']).on('change', livereload.changed);
