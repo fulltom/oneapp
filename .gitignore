@@ -13,6 +13,7 @@ pids
 logs
 results
 assets/bower_components/*
+build/*
 
 npm-debug.log
 node_modules

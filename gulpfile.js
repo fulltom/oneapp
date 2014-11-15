@@ -30,10 +30,8 @@ gulp.task('html', function () {
 
 
 gulp.task('styles', function() {
-  gulp.src(['assets/scss/*.scss'])
-	.pipe(sass({
-            outputStyle: 'extended'
-     }))
+  gulp.src(['assets/scss/**.scss'])
+	.pipe(sass())
 	// .pipe(rename({suffix: '.min'}))
  //  .pipe(minifycss())
   .pipe(livereload())
