@@ -9,7 +9,6 @@
 
 // Behold, here are all the Foundation components.
 
-@import "top-bar-theme";
 
 @import
   "foundation/components/grid",
@@ -47,4 +46,5 @@
   "foundation/components/top-bar",
   "foundation/components/type",
   "foundation/components/offcanvas",
-  "foundation/components/visibility";
+  "foundation/components/visibility",
+  "theme";
