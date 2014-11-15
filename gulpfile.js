@@ -30,12 +30,15 @@ gulp.task('html', function () {
 
 
 gulp.task('styles', function() {
-  gulp.src(['assets/scss/**.scss'])
+  gulp.src(['assets/scss/**/*.scss'])
+  .pipe(connect.reload())
+  .pipe(livereload())
 	.pipe(sass())
 	.pipe(rename({suffix: '.min'}))
   .pipe(minifycss())
   .pipe(gulp.dest('build/css'))
-  .pipe(livereload())
+
+
 });
 
 gulp.task('scripts', function() {
