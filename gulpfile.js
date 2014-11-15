@@ -32,15 +32,15 @@ gulp.task('html', function () {
 gulp.task('styles', function() {
   gulp.src(['assets/scss/**.scss'])
 	.pipe(sass())
-	// .pipe(rename({suffix: '.min'}))
- //  .pipe(minifycss())
+	.pipe(rename({suffix: '.min'}))
+  .pipe(minifycss())
+  .pipe(gulp.dest('build/css'))
   .pipe(livereload())
-  .pipe(gulp.dest('build/css'));
 });
 
 gulp.task('scripts', function() {
-  return gulp.src('assets/scripts/*.js')
-    .pipe(concat('main.js'))
+  return gulp.src('assets/js/*.js')
+    //.pipe(concat('main.js'))
     .pipe(gulp.dest('assets/js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
@@ -66,7 +66,7 @@ gulp.task('images', function() {
 gulp.task('watch', function() {
   livereload.listen();
 	gulp.watch(['assets/*.html'], ['html']).on('change', livereload.changed);
-	gulp.watch(['assets/scss/app.scss'], ['styles']).on('change', livereload.changed);
+	gulp.watch(['assets/scss/*.scss'], ['styles']).on('change', livereload.changed);
 	gulp.watch(['assets/scripts/*.js'], ['scripts']).on('change', livereload.changed);
 	gulp.watch(['assets/images/*'], ['images']).on('change', livereload.changed);
   gulp.watch(['build/*.html']).on('change', livereload.changed);
