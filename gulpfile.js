@@ -7,6 +7,7 @@ var gulp = require('gulp'),
 	imagemin = require('gulp-imagemin'),
 	minifycss = require('gulp-minify-css'),
 	rename = require('gulp-rename'),
+  clean = require('gulp-clean'),
 	livereload = require('gulp-livereload'),
 	connect = require('gulp-connect'),
   del = require('del')
@@ -15,7 +16,7 @@ var gulp = require('gulp'),
 //Connect
 gulp.task('connect', function() {
   connect.server({
-    root: 'assets',
+    root: 'build',
     livereload: true
   });
 });
@@ -29,14 +30,14 @@ gulp.task('html', function () {
 
 
 gulp.task('styles', function() {
-  gulp.src(['assets/scss/*.scss', '!assets/scss/_variables.scss'])
+  gulp.src(['assets/scss/*.scss'])
 	.pipe(sass({
-            includePaths: ['assets/scss', 'assets/bower_components/foundation/scss'],
-            outputStyle: 'expanded'
+            outputStyle: 'extended'
      }))
-	.pipe(rename({suffix: '.min'}))
-    .pipe(minifycss())
-    .pipe(gulp.dest('build/css'));
+	// .pipe(rename({suffix: '.min'}))
+ //  .pipe(minifycss())
+  .pipe(livereload())
+  .pipe(gulp.dest('build/css'));
 });
 
 gulp.task('scripts', function() {
@@ -48,22 +49,30 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('build/js'))
 });
 
+gulp.task('vendors', function() {
+  return gulp.src('assets/bower_components/foundation/js/vendor/*.js')
+    .pipe(gulp.dest('assets/js'))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(uglify())
+    .pipe(gulp.dest('build/js/vendors'))
+});
+
 gulp.task('images', function() {
   return gulp.src('assets/images/*')
     .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
     .pipe(gulp.dest('build/img'))
 });
 
+
+
 gulp.task('watch', function() {
-	gulp.watch(['assets/*.html'], ['html']);
-	gulp.watch('assets/styles/*.scss', ['styles']);
-	gulp.watch('assets/scripts/*.js', ['scripts']);
-	gulp.watch('assets/images/*', ['images']);
+  livereload.listen();
+	gulp.watch(['assets/*.html'], ['html']).on('change', livereload.changed);
+	gulp.watch(['assets/scss/app.scss'], ['styles']).on('change', livereload.changed);
+	gulp.watch(['assets/scripts/*.js'], ['scripts']).on('change', livereload.changed);
+	gulp.watch(['assets/images/*'], ['images']).on('change', livereload.changed);
+  gulp.watch(['build/*.html']).on('change', livereload.changed);
 });
 
-gulp.task('clean', function(cb) {
-    del(['build/*'], cb);
-});
-
-gulp.task('default', ['connect', 'html', 'scripts','styles', 'images', 'watch','clean'], function() {});
+gulp.task('default', ['connect', 'html', 'scripts', 'vendors', 'styles', 'images', 'watch'], function() {});
 
