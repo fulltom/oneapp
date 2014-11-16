@@ -1,4 +1,4 @@
 SPA
 ======
 
-SPA modern webapp
+SPA webapp fully responsive and production driven
