@@ -10,6 +10,7 @@ var gulp = require('gulp'),
   clean = require('gulp-clean'),
 	livereload = require('gulp-livereload'),
 	connect = require('gulp-connect'),
+  minifyHTML = require('gulp-minify-html'),
   del = require('del')
 ;
 
@@ -25,6 +26,7 @@ gulp.task('connect', function() {
 gulp.task('html', function () {
   gulp.src('assets/*.html')
     .pipe(connect.reload())
+    .pipe(minifyHTML())
     .pipe(gulp.dest('build'))
 });
 
@@ -52,7 +54,7 @@ gulp.task('scripts', function() {
 
 gulp.task('vendors', function() {
   return gulp.src('assets/bower_components/foundation/js/vendor/*.js')
-    .pipe(gulp.dest('assets/js'))
+    .pipe(gulp.dest('assets/js/vendors'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(gulp.dest('build/js/vendors'))
@@ -65,12 +67,11 @@ gulp.task('images', function() {
 });
 
 
-
 gulp.task('watch', function() {
   livereload.listen();
 	gulp.watch(['assets/*.html'], ['html']).on('change', livereload.changed);
 	gulp.watch(['assets/scss/**/*.scss'], ['styles']).on('change', livereload.changed);
-	gulp.watch(['assets/scripts/*.js'], ['scripts']).on('change', livereload.changed);
+	gulp.watch(['assets/js/*.js'], ['scripts']).on('change', livereload.changed);
 	gulp.watch(['assets/images/*'], ['images']).on('change', livereload.changed);
   gulp.watch(['build/*.html']).on('change', livereload.changed);
 });

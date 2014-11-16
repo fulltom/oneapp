@@ -1,75 +1,133 @@
-//
-// TOP BAR
-//
 
-// $include-html-top-bar-classes: $include-html-classes;
 
-// Background color for the top bar
-//$topbar-bg-color: rgba(0, 0,0,0);
-// $topbar-bg: $topbar-bg-color;
+//MIXIN
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  	-webkit-transform: translateY(-50%);
+  	-ms-transform: translateY(-50%);
+  	transform: translateY(-50%);
+}
 
-// Height and margin
-// $topbar-height: 45px;
-// $topbar-margin-bottom: 0;
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+  background-clip: padding-box;  /* stops bg color from leaking outside the border: */
+}
 
-// Controlling the styles for the title in the top bar
-// $topbar-title-weight: $font-weight-normal;
-// $topbar-title-font-size: rem-calc(17);
 
-// Style the top bar dropdown elements
-// $topbar-dropdown-bg: #333;
-// $topbar-dropdown-link-color: #fff;
-// $topbar-dropdown-link-bg: #333;
-// $topbar-dropdown-link-weight: $font-weight-normal;
-// $topbar-dropdown-toggle-size: 5px;
-// $topbar-dropdown-toggle-color: #fff;
-// $topbar-dropdown-toggle-alpha: 0.4;
+.bBig {border:3px solid grey;}
 
-// Set the link colors and styles for top-level nav
-// $topbar-link-color: #fff;
-// $topbar-link-color-hover: #fff;
-// $topbar-link-color-active: #fff;
-// $topbar-link-color-active-hover: #fff;
-// $topbar-link-weight: $font-weight-normal;
-// $topbar-link-font-size: rem-calc(13);
-// $topbar-link-hover-lightness: -10%; // Darken by 10%
-// $topbar-link-bg: $topbar-bg;
-// $topbar-link-bg-color-hover: #272727;
-// $topbar-link-bg-hover: #272727;
-// $topbar-link-bg-active: $primary-color;
-// $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
-// $topbar-link-font-family: $body-font-family;
-// $topbar-link-text-transform: none;
-// $topbar-link-padding: $topbar-height / 3;
+#header {
+	left: 0;
+	position: fixed;
+	text-align: right;
+	top: 0;
+	width: 100%;
+	z-index: 999;
+	height:70px;
+	zoom:1;
+	padding:10px 0 10px 0;
+	.logo {
+		padding-left:10px;
+		display:block;
+		float:left;
 
-// $topbar-button-font-size: 0.75rem;
-// $topbar-button-top: 7px;
+	}
+	a {
+		display:inline-block;
+	}	
+	nav {
+		@include vertical-align;
+	}
+	
+	ul {
+		margin:0;
+		li {
+			display:inline-block;
+			a {
+				color:white;
+				padding:8px 10px;
+				margin-right:11px;
+				margin-left:11px;
+				border:1px solid none;
+				@include border-radius(2px);
+				&:hover {
+					margin-right:10px;
+					margin-left:10px;
+					border:1px solid #fff; 
+				}
+				&.last {
+					&:hover {
+						margin-right:20px;
+					}
+					margin-right:21px;
+				}
+			}
+		}
+		list-style-type: none;
+		position:relative;
+	}
+	.hamburger {
+		position: absolute;
+		right:15px;
+		font-size:1.7em;
+		top: 20px;
+		color: rgba(0, 0, 0, 0.8);
+		text-decoration: none;
+		display: none;
+		color:white;
+	}
+}
 
-// $topbar-dropdown-label-color: #777;
-// $topbar-dropdown-label-text-transform: uppercase;
-// $topbar-dropdown-label-font-weight: $font-weight-bold;
-// $topbar-dropdown-label-font-size: rem-calc(10);
-// $topbar-dropdown-label-bg: #333;
+@media screen and (max-width: 700px) {
+	#header {
+		margin-bottom:10px;
+		background-color:#62354D;
+		.logo {
+			width:100%;
+			text-align:center;
+			padding-left:0;	
+		}
+		nav {
+			-webkit-transform: none;
+			-ms-transform: none;
+			transform: none;
+			top:10px;
+			display:none;
+		}
+		.hamburger {
+			display:block;
+			position:absolute;
+			z-index:9999;
+		}
+		ul {
+			li{
+				text-align:center;
+				background-color:#62354D;
+				padding:10px;
+				width:100%;
+				a {
+					&:hover, &.last, &:hover.last {
+						border:none;
+						margin:0;
+					}
+				display:block;
+				}
+			}
+		} 
+	}
+}
 
-// Top menu icon styles
-// $topbar-menu-link-transform: uppercase;
-// $topbar-menu-link-font-size: rem-calc(13);
-// $topbar-menu-link-weight: $font-weight-bold;
-// $topbar-menu-link-color: #fff;
-// $topbar-menu-icon-color: #fff;
-// $topbar-menu-link-color-toggled: #888;
-// $topbar-menu-icon-color-toggled: #888;
+.blurry {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	bottom: 0px;
+	height:800px;
+	border: none;
+	background: url('../img/blurry.jpg') center;
+	background-size: cover;
+}
 
-// Transitions and breakpoint styles
-// $topbar-transition-speed: 300ms;
-// Using rem-calc for the below breakpoint causes issues with top bar
-// $topbar-breakpoint: #{lower-bound($medium-range)}; // Change to 9999px for always mobile layout
-// $topbar-media-query: $medium-up;
-
-// Divider Styles
-// $topbar-divider-border-bottom: solid 1px  scale-color($topbar-bg-color, $lightness: 13%);
-// $topbar-divider-border-top: solid 1px scale-color($topbar-bg-color, $lightness: -50%);
-
-// Sticky Class
-// $topbar-sticky-class: ".sticky";
-// $topbar-arrows: true; //Set false to remove the triangle icon from the menu item
