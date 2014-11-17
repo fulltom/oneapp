@@ -69,21 +69,21 @@
 		position:relative;
 	}
 	.hamburger {
-		position: absolute;
-		right:15px;
-		font-size:1.7em;
-		top: 20px;
-		color: rgba(0, 0, 0, 0.8);
-		text-decoration: none;
-		display: none;
-		color:white;
-	}
+			position: absolute;
+			left:15px;
+			font-size:1.7em;
+			top: 20px;
+			color: rgba(0, 0, 0, 0.8);
+			text-decoration: none;
+			display: none;
+			color:white;
+	}	
 }
 
 @media screen and (max-width: 700px) {
 	#header {
 		margin-bottom:10px;
-		background-color:#62354D;
+		background-color:darken(grey, 20%);
 		.logo {
 			width:100%;
 			text-align:center;
@@ -104,7 +104,7 @@
 		ul {
 			li{
 				text-align:center;
-				background-color:#62354D;
+				background-color:darken(grey, 20%);
 				padding:10px;
 				width:100%;
 				a {
@@ -117,17 +117,5 @@
 			}
 		} 
 	}
-}
-
-.blurry {
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	left: 0px;
-	bottom: 0px;
-	height:800px;
-	border: none;
-	background: url('../img/blurry.jpg') center;
-	background-size: cover;
 }
 
