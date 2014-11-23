@@ -1,5 +1,7 @@
 // Core variables and mixins
-@import "bootstrap/variables";
+
+//Them Variables
+@import "custom-variables";
 @import "bootstrap/mixins";
 
 // Reset and dependencies
@@ -22,7 +24,8 @@
 @import "bootstrap/button-groups";
 @import "bootstrap/input-groups";
 @import "bootstrap/navs";
-@import "bootstrap/navbar";
+//Theme navbar
+@import "custom-navbar";
 @import "bootstrap/breadcrumbs";
 @import "bootstrap/pagination";
 @import "bootstrap/pager";
@@ -40,9 +43,9 @@
 @import "bootstrap/close";
 
 // Components w/ JavaScript
-@import "bootstrap/modals";
-@import "bootstrap/tooltip";
-@import "bootstrap/popovers";
+// @import "bootstrap/modals";
+// @import "bootstrap/tooltip";
+// @import "bootstrap/popovers";
 @import "bootstrap/carousel";
 
 // Utility classes

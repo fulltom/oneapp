@@ -27,7 +27,7 @@ gulp.task('connect', function() {
 gulp.task('html', function () {
   gulp.src('assets/*.html')
     .pipe(connect.reload())
-    .pipe(minifyHTML())
+    //.pipe(minifyHTML())
     .pipe(gulp.dest('build'))
 });
 
@@ -44,22 +44,22 @@ gulp.task('styles', function() {
 
 });
 
-// gulp.task('scripts', function() {
-//   return gulp.src('assets/js/*.js')
-//     //.pipe(concat('main.js'))
-//     .pipe(gulp.dest('assets/js'))
-//     .pipe(rename({suffix: '.min'}))
-//     .pipe(uglify())
-//     .pipe(gulp.dest('build/js'))
-// });
+gulp.task('scripts', function() {
+  return gulp.src('assets/bower_components/bootstrap-sass-official/assets/javascripts/*.js')
+    .pipe(concat('main.js'))
+    .pipe(gulp.dest('assets/js'))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(uglify())
+    .pipe(gulp.dest('build/js'))
+});
 
-// gulp.task('vendors', function() {
-//   return gulp.src('assets/bower_components/foundation/js/vendor/*.js')
-//     .pipe(gulp.dest('assets/js/vendors'))
-//     .pipe(rename({suffix: '.min'}))
-//     .pipe(uglify())
-//     .pipe(gulp.dest('build/js/vendors'))
-// });
+gulp.task('vendors', function() {
+  return gulp.src('assets/js/vendors/*.js')
+    .pipe(gulp.dest('assets/js/vendors'))
+    .pipe(rename({suffix: '.min'}))
+    .pipe(uglify())
+    .pipe(gulp.dest('build/js'))
+});
 
 gulp.task('images', function() {
   return gulp.src('assets/images/*')
@@ -77,5 +77,5 @@ gulp.task('watch', function() {
   gulp.watch(['build/*.html']).on('change', livereload.changed);
 });
 
-gulp.task('default', ['connect', 'html', 'styles', 'images', 'watch'], function() {});
+gulp.task('default', ['connect', 'html', 'styles', 'vendors', 'scripts', 'images', 'watch'], function() {});
 
