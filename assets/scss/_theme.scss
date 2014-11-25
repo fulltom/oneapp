@@ -1,12 +1,13 @@
 // MIXIN
 
-@mixin filter($filter-type,$filter-amount) {
-  -webkit-filter: $filter-type+unquote('(#{$filter-amount})');
-  -moz-filter: $filter-type+unquote('(#{$filter-amount})');
-  -ms-filter: $filter-type+unquote('(#{$filter-amount})');
-  -o-filter: $filter-type+unquote('(#{$filter-amount})');
-  filter: $filter-type+unquote('(#{$filter-amount})');
-}
+// COLOR BRAND VAR
+$brand-color:#D97C36;
+$brand-color-darken:#8C4815;
+$brand-color-lighten:#FFA059;
+$brand-color-secondary:#077E8C;
+$brand-color-secondary-lighten:#36C7D9;
+$brand-color-grey:#777;
+
 
 // MAIN
 #header {
@@ -19,6 +20,21 @@
 	-o-background-size: cover; /* pour Opera */
 	background-size: cover; /* version standardisée */
 }
-.jumbotron {
-	background-color: transparent;
+
+
+#theme {
+	.jumbotron {
+		background-color: transparent;
+		.btn-ghost {
+			background-color:none;
+			border-radius:3px;
+			border:1px solid white;
+			color:white;
+			&:hover {
+				background-color:white;
+				color:$brand-color;
+			}
+		}
+	}
 }
+
