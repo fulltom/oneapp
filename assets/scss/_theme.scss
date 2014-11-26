@@ -11,7 +11,7 @@ $brand-color-grey:#777;
 
 // MAIN
 #header {
-	height:400px;
+	height:350px;
 	width:100%;
 	position:relative;
 	background:url('/img/blurry.jpg') no-repeat center fixed;
@@ -21,9 +21,14 @@ $brand-color-grey:#777;
 	background-size: cover; /* version standardisée */
 }
 
+.container {
+	max-width: 68.75em;
+	padding: 0 1em;
+}
 
-#theme {
+#ghost {
 	.jumbotron {
+		text-align: center;
 		background-color: transparent;
 		.btn-ghost {
 			background-color:none;
@@ -35,6 +40,14 @@ $brand-color-grey:#777;
 				color:$brand-color;
 			}
 		}
+	}
+	.sectionHightLight {
+		color:white;
+		background-color:$brand-color-lighten;
+	}
+	.about {
+		text-align:center;
+		padding:50px 0;
 	}
 }
 
