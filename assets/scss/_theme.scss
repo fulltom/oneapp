@@ -1,4 +1,15 @@
-// MIXIN
+//          _              _       _    _            _          _
+//         /\ \           / /\    / /\ /\ \         / /\       /\ \
+//        /  \ \         / / /   / / //  \ \       / /  \      \_\ \
+//       / /\ \_\       / /_/   / / // /\ \ \     / / /\ \__   /\__ \
+//      / / /\/_/      / /\ \__/ / // / /\ \ \   / / /\ \___\ / /_ \ \
+//     / / / ______   / /\ \___\/ // / /  \ \_\  \ \ \ \/___// / /\ \ \
+//    / / / /\_____\ / / /\/___/ // / /   / / /   \ \ \     / / /  \/_/
+//   / / /  \/____ // / /   / / // / /   / / /_    \ \ \   / / /
+//  / / /_____/ / // / /   / / // / /___/ / //_/\__/ / /  / / /
+// / / /______\/ // / /   / / // / /____\/ / \ \/___/ /  /_/ /
+// \/___________/ \/_/    \/_/ \/_________/   \_____\/   \_\/
+
 
 // COLOR BRAND VAR
 $brand-color:#D97C36;
@@ -19,6 +30,10 @@ $brand-color-grey:#777;
 	-moz-background-size: cover; /* pour Firefox */
 	-o-background-size: cover; /* pour Opera */
 	background-size: cover; /* version standardisée */
+}
+body, html {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility !important;
 }
 
 .container {
