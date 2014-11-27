@@ -17,7 +17,7 @@ var gulp = require('gulp'),
 //Connect
 gulp.task('connect', function() {
   connect.server({
-    root: 'build',
+    root: 'public',
     livereload: true,
     port: 8080
   });
@@ -28,7 +28,7 @@ gulp.task('html', function () {
   gulp.src('assets/*.html')
     .pipe(connect.reload())
     //.pipe(minifyHTML())
-    .pipe(gulp.dest('build'))
+    .pipe(gulp.dest('public'))
 });
 
 
@@ -38,7 +38,7 @@ gulp.task('styles', function() {
 	.pipe(sass())
 	.pipe(rename({suffix: '.min'}))
   .pipe(minifycss())
-  .pipe(gulp.dest('build/css'))
+  .pipe(gulp.dest('public/css'))
   .pipe(livereload())
 
 
@@ -50,7 +50,7 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('assets/js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
-    .pipe(gulp.dest('build/js'))
+    .pipe(gulp.dest('public/js'))
 });
 
 gulp.task('vendors', function() {
@@ -58,13 +58,13 @@ gulp.task('vendors', function() {
     .pipe(gulp.dest('assets/js/vendors'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
-    .pipe(gulp.dest('build/js'))
+    .pipe(gulp.dest('public/js'))
 });
 
 gulp.task('images', function() {
   return gulp.src('assets/images/*')
     .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
-    .pipe(gulp.dest('build/img'))
+    .pipe(gulp.dest('public/img'))
 });
 
 
@@ -74,7 +74,7 @@ gulp.task('watch', function() {
 	gulp.watch(['assets/scss/**/*.scss'], ['styles']).on('change', livereload.changed);
 	gulp.watch(['assets/js/*.js'], ['scripts']).on('change', livereload.changed);
 	gulp.watch(['assets/images/*'], ['images']).on('change', livereload.changed);
-  gulp.watch(['build/*.html']).on('change', livereload.changed);
+  gulp.watch(['public/*.html']).on('change', livereload.changed);
 });
 
 gulp.task('default', ['connect', 'html', 'styles', 'vendors', 'scripts', 'images', 'watch'], function() {});
