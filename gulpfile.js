@@ -15,17 +15,29 @@ var gulp = require('gulp'),
 ;
 
 //Connect
-gulp.task('connect', function() {
-  connect.server({
-    root: 'public',
-    livereload: true,
-    port: 8080
-  });
-});
+// gulp.task('connect', function() {
+//   connect.server({
+//     root: 'public',
+//     livereload: true,
+//     port: 8080
+//   });
+// });
+
+// MONITOR SERVER FOR CHANGES & RESTART
+gulp.task('nodemon', function() {
+  console.log('Running gulp task "NODEMON"');
+  nodemon({
+    script: server.js,
+    ext: 'js, ejs, hbs, jade, html, mustache, styl, less, scss',
+    ignore: ['README.md', 'node_modules/**', '.DS_Store']
+  })
+  .on('change', ['css']);
+
+}); // END: NODEMON TASK
 
 //Copy html
 gulp.task('html', function () {
-  gulp.src('assets/*.html')
+  gulp.src('app/assets/*.html')
     .pipe(connect.reload())
     //.pipe(minifyHTML())
     .pipe(gulp.dest('public'))
@@ -33,7 +45,7 @@ gulp.task('html', function () {
 
 
 gulp.task('styles', function() {
-  gulp.src(['assets/scss/*.scss'])
+  gulp.src(['app/assets/scss/*.scss'])
   .pipe(connect.reload())
 	.pipe(sass())
 	.pipe(rename({suffix: '.min'}))
@@ -45,24 +57,24 @@ gulp.task('styles', function() {
 });
 
 gulp.task('scripts', function() {
-  return gulp.src('assets/bower_components/bootstrap-sass-official/assets/javascripts/*.js')
+  return gulp.src('app/assets/bower_components/bootstrap-sass-official/assets/javascripts/*.js')
     .pipe(concat('main.js'))
-    .pipe(gulp.dest('assets/js'))
+    .pipe(gulp.dest('app/assets/js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(gulp.dest('public/js'))
 });
 
 gulp.task('vendors', function() {
-  return gulp.src('assets/js/vendors/*.js')
-    .pipe(gulp.dest('assets/js/vendors'))
+  return gulp.src('app/assets/js/vendors/*.js')
+    .pipe(gulp.dest('app/assets/js/vendors'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(gulp.dest('public/js'))
 });
 
 gulp.task('images', function() {
-  return gulp.src('assets/images/*')
+  return gulp.src('app/assets/images/*')
     .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
     .pipe(gulp.dest('public/img'))
 });
@@ -70,10 +82,10 @@ gulp.task('images', function() {
 
 gulp.task('watch', function() {
   livereload.listen();
-	gulp.watch(['assets/*.html'], ['html']).on('change', livereload.changed);
-	gulp.watch(['assets/scss/**/*.scss'], ['styles']).on('change', livereload.changed);
-	gulp.watch(['assets/js/*.js'], ['scripts']).on('change', livereload.changed);
-	gulp.watch(['assets/images/*'], ['images']).on('change', livereload.changed);
+	gulp.watch(['app/assets/*.html'], ['html']).on('change', livereload.changed);
+	gulp.watch(['app/assets/scss/**/*.scss'], ['styles']).on('change', livereload.changed);
+	gulp.watch(['app/assets/js/*.js'], ['scripts']).on('change', livereload.changed);
+	gulp.watch(['app/assets/images/*'], ['images']).on('change', livereload.changed);
   gulp.watch(['public/*.html']).on('change', livereload.changed);
 });
 

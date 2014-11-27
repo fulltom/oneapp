@@ -12,7 +12,7 @@ lib-cov
 pids
 logs
 results
-assets/bower_components/*
+app/assets/bower_components/*
 build/*
 
 npm-debug.log
