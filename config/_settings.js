@@ -7,8 +7,6 @@ module.exports = function (app) {
 
     autoRouting : true, // whether to use auto routing
 
-    buildDir : './_build/', // destination directory for builds
-
     cache : true, // whether to use caching
 
     // see https://github.com/dresende/node-orm2/wiki/Connecting-to-Database for more info on connection to your databse
