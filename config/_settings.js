@@ -25,7 +25,6 @@ module.exports = function (app) {
     engines : {
       html: 'hbs', // options: (ejs|hbs|hogan|jade|mustache)
       css: 'sass', // options: (stylus|sass|less) - set false to just use vanilla css
-      cssLibrary : false, // options: (axis|bourbon|nib) - set to false for none
     },
 
     gzip : true, // whether to enable gzip compression
@@ -51,9 +50,9 @@ module.exports = function (app) {
     port : 3000, // port to run the server on
 
     prettify : {
-      html : true, // whether to pretify html
-      css : true, // whether to pretify css
-      js : true // whether to pretify js
+      html : false, // whether to pretify html
+      css : false, // whether to pretify css
+      js : false // whether to pretify js
     },
 
     protocol : 'http://', // options: (http|https)

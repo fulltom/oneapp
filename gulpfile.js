@@ -79,7 +79,7 @@ gulp.task('nodemon', function() {
 
   nodemon({
     script: paths.app,
-    ext: 'js, ejs, hbs, jade, html, mustache, styl, less, scss',
+    ext: 'js, hbs, html, scss',
     ignore: ['README.md', 'node_modules/**', '.DS_Store']
   })
   .on('change', ['css']);

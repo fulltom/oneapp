@@ -11,10 +11,6 @@ var min_css, min_sass, min_js, cacheDir, htmlEngine, compress,
     morgan = require('morgan');
     require('colors');
 
-  // ENABLE G-ZIP COMPRESSION
-  if ( app.config.gzip === true ) {
-    app.use( compression() );
-  }
 
   // SHOW ERRORS IN DEV
   if (process.env.NODE_ENV === 'development') {
@@ -25,6 +21,15 @@ var min_css, min_sass, min_js, cacheDir, htmlEngine, compress,
 
   //PRETTIFY HTML
   app.locals.pretty = app.config.prettify.html;
+  //app.use(minify());
+
+    app.use(methodOverride());
+
+    // VIEW HELPERS
+    app.use(helpers(app.name));
+
+    app.use(compression());
+    app.use(minify());
 
   // LOG CSS ENGINE
   if ( app.config.engines.css !== false ) {
@@ -66,14 +71,10 @@ var min_css, min_sass, min_js, cacheDir, htmlEngine, compress,
   // MINIFY CSS
   if ( app.config.prettify.css === false ) {
     min_css = /css/;
-    min_less = /css/;
     min_sass = /css/;
-    min_stylus = /css/;
   } else {
     min_css = /donothinghere/;
-    min_less = /donothinghere/;
     min_sass = /donothinghere/;
-    min_stylus = /donothinghere/;
   }
 
   // MINIFY JS
@@ -122,11 +123,6 @@ var min_css, min_sass, min_js, cacheDir, htmlEngine, compress,
 
 
     tesla.log('INFO:'.blue.blue + ' using ' + app.config.engines.html + ' as view engine');
-
-    app.use(methodOverride());
-
-    // VIEW HELPERS
-    app.use(helpers(app.name));
 
     // CUSTOM MIDDLEWARE
     app.use(function(req,res,next){

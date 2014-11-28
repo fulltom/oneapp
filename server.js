@@ -28,9 +28,9 @@ if ( app.config.socket === true ) {
 server.listen( process.env.PORT || app.config.port, function( err ) {
 
   if ( !err ) { // IF THERE'S NO ERRORS
-    //tesla.inform(app, 'done');
+    tesla.inform(app, 'done');
   } else { // OH NOES! SOMETHING WENT WRONG!
-    //tesla.inform(app, 'error', err);
+    tesla.inform(app, 'error', err);
   }
 
 });
@@ -39,9 +39,9 @@ server.listen( process.env.PORT || app.config.port, function( err ) {
 process.on('uncaughtException', function(err) {
 
   if(err.errno === 'EADDRINUSE') {
-    //tesla.inform(app, 'eaddr');
+    tesla.inform(app, 'eaddr');
   } else {
-    //tesla.inform(app, 'error', err);
+    tesla.inform(app, 'error', err);
   }
 
   process.exit(1);
