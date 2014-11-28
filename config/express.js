@@ -53,13 +53,13 @@ var min_css, min_sass, min_js, cacheDir, htmlEngine, compress,
   // CUSTOM SETTINGS FOR SASS
   } else if ( app.config.engines.css === 'sass' && app.config.middleware.css === true ) {
 
-    var sass = require('node-sass');
+    //var sass = require('node-sass');
 
-    app.use(sass.middleware({
-      src: app.config.root + '/public/',
-      dest: app.config.root + '/public/',
-      debug: app.config.prettify.css
-    }));
+    // app.use(sass.middleware({
+    //   src: app.config.root + '/public/',
+    //   dest: app.config.root + '/public/',
+    //   debug: app.config.prettify.css
+    // }));
 
   }
 
@@ -69,20 +69,20 @@ var min_css, min_sass, min_js, cacheDir, htmlEngine, compress,
 
 
   // MINIFY CSS
-  if ( app.config.prettify.css === false ) {
-    min_css = /css/;
-    min_sass = /css/;
-  } else {
-    min_css = /donothinghere/;
-    min_sass = /donothinghere/;
-  }
+  // if ( app.config.prettify.css === false ) {
+  //   min_css = /css/;
+  //   min_sass = /css/;
+  // } else {
+  //   min_css = /donothinghere/;
+  //   min_sass = /donothinghere/;
+  // }
 
   // MINIFY JS
-  if ( app.config.prettify.js === false ) {
-    min_js = /js/;
-  } else {
-    min_js = /donothinghere/;
-  }
+  // if ( app.config.prettify.js === false ) {
+  //   min_js = /js/;
+  // } else {
+  //   min_js = /donothinghere/;
+  // }
 
   // CACHING
   if ( app.config.cache === true ) {
@@ -94,8 +94,8 @@ var min_css, min_sass, min_js, cacheDir, htmlEngine, compress,
 
   app.use(minify( {
     js_match: min_js,
-    css_match: min_css,
-    sass_match: min_sass,
+    //css_match: min_css,
+    //sass_match: min_sass,
     cache: cacheDir,
     blacklist: [/\.min\.(css|js)$/],
     whitelist: null

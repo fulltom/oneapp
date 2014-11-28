@@ -5,7 +5,9 @@ require('./config/environment/development')(app);
 
 var gulp = require('gulp'),
     nodemon = require('gulp-nodemon'),
-    uglify = require('gulp-uglify')
+    uglify = require('gulp-uglify'),
+    rename = require('gulp-rename'),
+    minifycss = require('gulp-minify-css'),
     paths = {
       app: 'server.js',
       build : app.config.buildDir,
@@ -57,10 +59,10 @@ gulp.task('css', function () {
 
       console.log('Compiling Sass');
 
-      gulp.src('./public/css/*.scss')
-          .pipe(sass({
-            sourcemap: false
-          }))
+       gulp.src('./public/css/**/*.scss')
+          .pipe(sass())
+          .pipe(rename({suffix: '.min'}))
+          .pipe(minifycss())
           .on('error', handleError)
           .pipe(gulp.dest( app.config.publicDir + 'css'));
 
