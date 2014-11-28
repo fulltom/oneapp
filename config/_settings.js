@@ -3,9 +3,6 @@ rootPath = path.normalize(__dirname + '/..');
 
 module.exports = function (app) {
   app.config = {
-    autoLoad : true, // whether to attempt autoload controllers
-
-    autoRouting : true, // whether to use auto routing
 
     cache : true, // whether to use caching
 
@@ -18,7 +15,6 @@ module.exports = function (app) {
     gzip : true, // whether to enable gzip compression
 
     liveReload : {
-      use : true,
       port : 35729, // port to run the server on
     },
 
@@ -26,9 +22,6 @@ module.exports = function (app) {
       console : true, // whether to allow tesla to log messages to the node console
       files : false // this doesn't do anything yet, eventually it will write .log files
     },
-
-    port : 1856, // port to run the server on
-
 
     protocol : 'http://', // options: (http|https)
 
