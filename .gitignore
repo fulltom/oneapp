@@ -14,6 +14,7 @@ logs
 results
 app/assets/bower_components/*
 build/*
+public/_cache/*
 
 npm-debug.log
 node_modules
