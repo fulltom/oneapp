@@ -1,6 +1,6 @@
 module.exports = function mainController(app){
 	app.get('/', function index(req,res){
-		res.render('index');
+		res.render('template', {partials: {nav: 'nav'}});
 	});
 	app.use(function(req, res) {
      	res.status(400);

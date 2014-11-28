@@ -1,16 +1,12 @@
 <!DOCTYPE html>
-<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
 <html class="no-js" lang="en" >
 	<head>
 		<meta charset="utf-8">
-		<title>{% block title %}My Site{% endblock %}</title>
-
-		{% block head %}
+		<title>My Site</title>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
-		{% endblock %}
 	</head>
 	<body>
-		{% block layout %}{% endblock %}
+  		{{{ yield }}}
 		<script src="js/jquery.min.js"></script>
 		<script src="js/main.min.js"></script>
 	</body>

@@ -9,9 +9,8 @@ var gulp = require('gulp'),
   minifyhtml = require('gulp-minify-html'),
 	rename = require('gulp-rename'),
   clean = require('gulp-clean'),
-  swig = require('gulp-swig'),
   nodemon = require('gulp-nodemon'),
-  livereload = require('gulp-livereload')
+  livereload = require('gulp-livereload'),
   del = require('del')
 ;
 
@@ -23,7 +22,7 @@ gulp.task('nodemon', function() {
     ext: 'js, html, scss',
     ignore: ['README.md', 'node_modules/**', '.DS_Store']
   })
-  .on('change', ['html']);
+  .on('change', ['watch','html' ]);
 });
 // END: NODEMON TASK
 
@@ -32,11 +31,13 @@ gulp.task('nodemon', function() {
 // });
 
 gulp.task('html', function () {
-    gulp.src('app/views/index.html')
-    .pipe(swig())
+    gulp.src('app/views/layout.html')
+    .pipe(minifyhtml())
+    .pipe(rename('index.html'))
     .pipe(gulp.dest('public'))
     .pipe(livereload())
 });
+
 
 gulp.task('styles', function() {
   gulp.src(['app/assets/scss/*.scss'])
@@ -73,13 +74,14 @@ gulp.task('images', function() {
 
 
 gulp.task('watch', function() {
-	gulp.watch(['app/views/*.html'], ['html']).on('change', livereload.changed);
+  livereload.listen();
+  //gulp.watch(['app/assets/views/index.html'], ['html']).on('change', livereload.changed);
 	gulp.watch(['app/assets/scss/**/*.scss'], ['styles']).on('change', livereload.changed);
 	gulp.watch(['app/assets/js/*.js'], ['scripts']).on('change', livereload.changed);
 	gulp.watch(['app/assets/images/*'], ['images']).on('change', livereload.changed);
 });
 
-gulp.task('default', ['nodemon','html', 'styles', 'vendors', 'scripts', 'images','watch'], function() {});
+gulp.task('default', ['nodemon', 'styles', 'vendors', 'scripts', 'images' ,'watch'], function() {});
 //gulp.task('default', ['connect', 'html', 'styles', 'vendors', 'scripts', 'images', 'watch'], function() {});
 
 

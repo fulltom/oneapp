@@ -12,8 +12,8 @@ var express = require('express'),
 	cookieSession = require('cookie-session'),
 	morgan = require('morgan'),
 	compression = require('compression'),
-	server  = http.createServer(app),
-	swig = require('swig')
+	server  = http.createServer(app)
+
 	//i18n = require('i18n')
 ;
 
@@ -30,20 +30,28 @@ require('./config/_settings')(app); // MAIN APP SETTINGS
 //   directory: __dirname + '/locales'
 // });
 
+//app.set('view cache', false);
+app.set('views', __dirname + '/app/views');
+app.enable('view cache');
+app.engine('html', require('hogan-express'));
+app.set('view engine', 'html');
+app.set('layout', 'layout');
+
 
 app.set('port', process.env.PORT || 3000);
 
-app.engine('html', swig.renderFile);
-app.set('view engine', 'html');
-app.set('views', __dirname + '/app/views');
+// swig.setDefaults({cache:false});
+// app.engine('html', swig.renderFile)
+
+var publicPath = path.join(__dirname, 'app/public');
+app.use(express.static(publicPath));
 
 app.use(morgan('development' === app.get('env') ? 'dev' : 'default'));
+
 app.use(cookieParser());
 // app.use(i18n.init);
 
-var publicPath = path.join(__dirname, 'public');
 
-app.use(express.static(publicPath));
 
 if('development' === app.get('env')){
 	app.use(require('errorhandler')());
@@ -53,6 +61,7 @@ if('development' === app.get('env')){
 
 app.use(function(req,res,next) {
 	app.locals.url = req.url;
+	res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate');
 	//app.locals.layout
 	next();
 });
