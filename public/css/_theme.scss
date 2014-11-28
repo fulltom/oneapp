@@ -39,8 +39,6 @@ body, html {
 	margin-bottom:10px;
 }
 
-
-
 .container {
 	max-width: 68.75em;
 	padding: 0 1em;
@@ -50,9 +48,10 @@ body, html {
 	.jumbotron {
 		text-align: left;
 		background-color: transparent;
+		padding-bottom: 0 !important;
 		.btn-ghost {
 			background-color:none;
-			border-radius:9px;
+			border-radius:3px;
 			border:1px solid white;
 			color:white;
 			&:hover {

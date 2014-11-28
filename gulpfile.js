@@ -70,7 +70,8 @@ gulp.task('css', function () {
 
   }
 
-}); // END: CSS TASK
+});
+// END: CSS TASK
 
 
 
