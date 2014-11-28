@@ -2,7 +2,17 @@ var path = require('path'),
 rootPath = path.normalize(__dirname + '/..');
 
 module.exports = function (app) {
+
+  app.site = {
+    name : 'bricks', // the name of your app
+  };
+
   app.config = {
+    autoLoad : true, // whether to attempt autoload controllers
+
+    autoRouting : true, // whether to use auto routing
+
+    buildDir : './_build/', // destination directory for builds
 
     cache : true, // whether to use caching
 
@@ -12,9 +22,18 @@ module.exports = function (app) {
       driver : 'mongodb' // which db driver to use
     },
 
+    engines : {
+      html: 'hbs', // options: (ejs|hbs|hogan|jade|mustache)
+      css: 'sass', // options: (stylus|sass|less) - set false to just use vanilla css
+      cssLibrary : false, // options: (axis|bourbon|nib) - set to false for none
+    },
+
     gzip : true, // whether to enable gzip compression
 
+    jsonp : true, // allow jsonp requests
+
     liveReload : {
+      use : true,
       port : 35729, // port to run the server on
     },
 
@@ -23,12 +42,39 @@ module.exports = function (app) {
       files : false // this doesn't do anything yet, eventually it will write .log files
     },
 
+    // WHETHER TO HANDLE CSS & HTML TEMPLATE VIA MIDDLEWARE OR GULP
+    middleware: {
+      css: false, // set true if you want to process via middleware instead of Gulp
+      html: true, // jade, handlebars, etc still need to run through middleware for now
+    },
+
+    port : 3000, // port to run the server on
+
+    prettify : {
+      html : true, // whether to pretify html
+      css : true, // whether to pretify css
+      js : true // whether to pretify js
+    },
+
     protocol : 'http://', // options: (http|https)
 
     publicDir : './public/', // public directory where images, javascript, css, etc is stored
 
     root : rootPath, // path to the root of your server
 
+    secret : 'MYAPPSECRET', // placeholder for now, will be implemented later
+
+    socket : false // WHETHER TO USE SOCKET.IO
+
+  };
+
+
+  // some default meta settings for <head>
+  app.site.meta = {
+    description : '',
+    encoding : 'utf-8',
+    keywords : '',
+    viewport : 'width=device-width, user-scalable=yes, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0'
   };
 
 };
