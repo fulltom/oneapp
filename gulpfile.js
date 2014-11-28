@@ -16,7 +16,6 @@ var gulp = require('gulp'),
       js: [app.config.publicDir + 'js/**/*', 'app/**/*.js'],
     };
 
-
     // ONLY LOAD LIVE-RELOAD IF IT'S REQUIRED
     if ( app.config.liveReload.use === true ) {
       var livereload = require('gulp-livereload'),
@@ -31,9 +30,7 @@ var gulp = require('gulp'),
       gulp-ruby-sass is slower than gulp-sass, but supports Sass 3.3.
       gulp-sass is faster, but uses liblass which doesn't yet support Sass 3.2
     */
-
     var sass = require('gulp-ruby-sass');
-    // var sass = require('gulp-sass');
   }
 
 

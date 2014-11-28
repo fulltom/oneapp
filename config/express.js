@@ -60,7 +60,7 @@ var min_css, min_sass, min_js, cacheDir, htmlEngine, compress,
 
 
   // SERVE STATIC FILES
-  app.use( express.static( app.config.root + '/public/') );
+  app.use( express.static(app.config.root + '/public/') );
 
 
   // MINIFY CSS
@@ -111,10 +111,6 @@ var min_css, min_sass, min_js, cacheDir, htmlEngine, compress,
   // SET VIEWS DIR
   app.set('views', app.config.root + '/app/views');
 
-  // SET JSONP
-  if ( app.config.jsonp === true ) {
-    app.enable('jsonp callback');
-  }
 
     // COOKIE PARSER (KEEP ABOVE SESSION)
     app.use(cookieParser());
