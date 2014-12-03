@@ -59,7 +59,7 @@ gulp.task('css', function () {
 
       console.log('Compiling Sass');
 
-       gulp.src('./public/css/**/*.scss')
+       gulp.src('./app/assets/scss/**/*.scss')
           .pipe(sass())
           .pipe(rename({suffix: '.min'}))
           .pipe(minifycss())
